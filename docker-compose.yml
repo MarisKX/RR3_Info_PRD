@@ -6,3 +6,7 @@ services:
       context: .
     volumes:
       - ./django_backend:/django_backend
+    ports:
+      - "8070:8070"
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8070"
