@@ -4,13 +4,20 @@ ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /requirements.txt
 
-RUN apk add --update --no-cache postgresql-client build-base postgresql-dev
+RUN apk add --update --no-cache postgresql-client build-base postgresql-dev \
+                                musl-dev zlib zlib-dev linux-headers
 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /requirements.txt
 
-ENV PATH="/py/bin:$PATH"
+COPY ./scripts /scripts
+RUN chmod -R +x /scripts
 
-COPY ./django_backend /c
+ENV PATH="/scripts:/py/bin:$PATH"
+
+COPY ./django_backend /django_backend
 WORKDIR /django_backend
+
+EXPOSE 80
+CMD ["/scripts/run.sh"]

@@ -1,0 +1,20 @@
+
+.text-green {
+    color: rgb(117,175,74) !important;
+}
+
+.text-red {
+    color: red !important;
+}
+
+.bg-blue {
+    color: rgb(30, 101, 190) !important;
+}
+
+.bg-white {
+    color: white;
+}
+
+.text-blue {
+    color: rgb(30, 101, 190) !important;
+}

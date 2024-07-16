@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+        <a href="{% url 'core' %}" class="nav-link main-logo-link"><h2 class="my-0">Real Racing 3 info</h2></a>
+    </div>
+    <div class="col-12 col-lg-8 my-auto py-1 py-lg-0 text-center text-lg-left">
+
+      <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+
+        {% if request.user.is_superuser %}
+        <li class="list-inline-item dropdown">
+            <button class="btn btn-secondary bg-white text-blue" id="properties" data-bs-toggle="dropdown" aria-expanded="false">
+              Manager Options
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="properties">
+              <li><a class="dropdown-item" href="#">General Settings</a></li>
+            </ul>
+          </li>
+        {% endif %}
+    </ul>
+</div>

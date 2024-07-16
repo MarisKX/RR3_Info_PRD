@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}Home{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        {% include 'includes/top-data.html' %}
+    </div>
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">Home | Statistics</h4>
+    <h5 class="my-5 mx-5">Cars | Top Cars in Road Collection</h5>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Fastest cars by Top Speed</caption>
+                {% for car in road_collection_fastest_car_by_top_speed %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.max_top_speed }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Fastest cars by Acceleration</caption>
+                {% for car in road_collection_fastest_car_by_acceleration %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.max_acceleration }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest PR</caption>
+                {% for car in road_collection_highest_max_pr %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.max_pr_score }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Most expensive repair</caption>
+                {% for car in road_collection_most_expensive_repair %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.repair_price }}</td>
+                        <td>{{ car.repair_time|format_time }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest purchase price - R$</caption>
+                {% for car in road_collection_most_expensive_purchase_R %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.default_price }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest purchase price - Gold</caption>
+                {% for car in road_collection_most_expensive_purchase_G %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.default_price }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest upgrade price - R$</caption>
+                {% for car in road_collection_most_expensive_upgrades_R %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.upgrades_total_R }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest upgrade price - Gold</caption>
+                {% for car in road_collection_most_expensive_upgrades_G %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ car }}</td>
+                        <td>{{ car.upgrades_total_G }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <h5 class="my-5 mx-5">Events | Top Events in Road Collection</h5>
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest R$ Reward</caption>
+                {% for event in road_collection_highest_rs_reward %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ event.event_group.display_name }}</td>
+                        <td>{{ event.event_sub_group.display_name }}</td>
+                        <td class="text-end">{{ event.page }}-{{ event.page_sequence }}</td>
+                        <td>{{ event.display_name }}</td>
+                        <td>{{ event.event_type.display_name }}</td>
+                        <td class="text-end">{{ event.reward }} R$</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col">
+            <table class="table table-striped caption-top mx-3">
+                <caption>Highest FAME Reward</caption>
+                {% for event in road_collection_highest_fame_reward %}
+                    <tr>
+                        <td>{{ forloop.counter }}.</td>
+                        <td>{{ event.event_group.display_name }}</td>
+                        <td>{{ event.event_sub_group.display_name }}</td>
+                        <td class="text-end">{{ event.page }}-{{ event.page_sequence }}</td>
+                        <td>{{ event.display_name }}</td>
+                        <td>{{ event.event_type.display_name }}</td>
+                        <td class="text-end">{{ event.reward_fame }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}
