@@ -39,3 +39,62 @@ header {
 :root {
     --header-height: 70px; /* Default header height */
 }
+
+.logo-container {
+    position: relative;
+    display: inline-block; /* Ensures the container only takes up as much space as needed */
+}
+
+.main-logo-link {
+    font-family: "Press Start 2P", system-ui;
+    font-size: 2.5em;
+    display: block;
+    position: relative; /* Needed for positioning child elements */
+    z-index: 1; /* Ensure this is on top */
+    white-space: nowrap;
+}
+
+/* Ensure children inherit font size */
+.main-logo-link * {
+    font-size: inherit;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%; /* Center vertically relative to main logo */
+    left: 50%; /* Center horizontally relative to main logo */
+    transform: translate(210px, -40px) rotate(-35deg); /* Adjust positioning and tilt */
+    font-size: 4em; /* Adjust size as needed to be responsive */
+    color: yellow; /* Adjust color as needed */
+    white-space: nowrap; /* Prevents text from wrapping */
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    z-index: 1050; /* Ensure this is below the main logo text */
+}
+
+@media (max-width: 1649px) {
+    .main-logo-link {
+        font-size: 2em; /* Adjust font size as needed for smaller screens */
+    }
+    .overlay-text {
+        font-size: 3em; /* Adjust overlay text size as needed for smaller screens */
+        transform: translate(170px, -30px) rotate(-35deg); /* Adjust positioning and tilt */
+    }
+}
+
+@media (max-width: 700px) {
+    .main-logo-link {
+        font-size: 1.5em; /* Adjust font size as needed for smaller screens */
+    }
+    .overlay-text {
+        font-size: 2.5em; /* Adjust overlay text size as needed for smaller screens */
+        transform: translate(125px, -30px) rotate(-35deg); /* Adjust positioning and tilt */
+    }
+}
