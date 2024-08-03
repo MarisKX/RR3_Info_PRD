@@ -1,0 +1,35 @@
+/* Specific styling to ensure visibility and correct positioning */
+.dropdown-submenu {
+    position: relative;
+}
+
+.main-dropdown-menu {
+    border-top: 5px solid transparent; /* Adds 'invisible' space above the dropdown */
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;  /* Ensure the submenu displays on hover */
+    position: absolute;
+    left: 100%;  /* Position to the right of the parent item */
+    top: 0;
+    margin-top: -10px; /* Adjust based on your styling needs */
+}
+
+.menu-btn {
+    font-size: 1.5em;
+    min-width: 100px;
+}
+
+.menu-btn:hover {
+    color: white !important;
+    background-color: rgb(30, 101, 190) !important;
+}
+
+.text-link {
+    color: inherit; /* Inherit the color from the parent */
+    text-decoration: none; /* Remove the default underline */
+}
+
+.text-link:hover {
+    color: rgb(218, 145, 0)
+}

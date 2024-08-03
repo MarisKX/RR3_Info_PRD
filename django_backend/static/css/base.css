@@ -9,11 +9,15 @@ html {
 body {
     height: calc(100vh - 164px);
     font-family: "Teko", sans-serif;
-    font-family: "Teko", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
     font-size: 100%;
+    background-color: rgb(204, 235, 255)
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 header {
@@ -25,11 +29,17 @@ header {
     padding: 15px;
 }
 
-
 .main-content {
-    width: 80%;
+    width: 70%;
     margin: 0 auto; /* Center the content */
     padding-top: calc(var(--header-height) + 10px); /* Adjust 20px as needed for spacing */
+    font-size: 1.2em;
+}
+
+.content-link {
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .top-data {
@@ -53,7 +63,7 @@ header {
     font-size: 2.5em;
     display: block;
     position: relative; /* Needed for positioning child elements */
-    z-index: 1; /* Ensure this is on top */
+    z-index: 1; /* Ensures this is on top */
     white-space: nowrap;
 }
 
@@ -62,6 +72,7 @@ header {
     font-size: inherit;
 }
 
+/* styles for info text */
 .overlay-text {
     position: absolute;
     top: 50%; /* Center vertically relative to main logo */
@@ -82,6 +93,125 @@ header {
     z-index: 1050; /* Ensure this is below the main logo text */
 }
 
+/* Styling for table - picture size etc.. */
+.list-image {
+    height: 75px;
+    width: auto;
+}
+
+.list-image-carousel {
+    height: 60px;
+    width: auto;
+}
+
+.list-image-rewards {
+    height: 120px;
+    width: auto;
+    margin: 5px;
+}
+
+.list-row {
+    margin: 5px;
+}
+
+.imagefield-td {
+    height: auto;
+    width: 120px;
+}
+
+.event-picture {
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+
+th {
+    text-align: center; /* Centers the text in table headers */
+}
+
+/* Carousel settings */
+
+.fa-chevron-right.fa-solid {
+    font-size: 3em;
+    margin-left: 90px;
+}
+
+.fa-chevron-left.fa-solid {
+    font-size: 3em;
+    margin-right: 90px;
+}
+
+#eventGroupCarousel {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#eventSubGroupCarousel {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.carousel-inner-group {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.carousel-inner-subgroup {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.group-carousel-picture {
+    max-width: 700px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.subgroup-carousel-picture {
+    max-width: 800px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.list-image-carousel {
+    height: 60px;
+    width: auto;
+}
+
+#carColorCarousel {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.car-carousel-inner {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.not-available-cars {
+    opacity: 0.5; /* Make the element semi-transparent */
+    filter: grayscale(100%); /* Apply a grayscale filter to the element */
+    pointer-events: none; /* Optionally prevent interaction */
+}
+
+@media (max-width: 2070px) {
+    .carousel-inner-subgroup {
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 1780px) {
+    #eventGroupCarousel {
+        width: 70%;
+    }
+    .carousel-inner-group {
+        width: 60%;
+    }
+    .carousel-inner-subgroup {
+        min-height: 450px;
+    }
+}
+
 @media (max-width: 1649px) {
     .main-logo-link {
         font-size: 2em; /* Adjust font size as needed for smaller screens */
@@ -89,6 +219,27 @@ header {
     .overlay-text {
         font-size: 3em; /* Adjust overlay text size as needed for smaller screens */
         transform: translate(170px, -30px) rotate(-35deg); /* Adjust positioning and tilt */
+    }
+    #eventGroupCarousel {
+        width: 75%;
+    }
+    .carousel-inner-group {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .group-carousel-image {
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 991px) {
+    .top-data {
+        padding-top: calc(var(--header-height) + 70px); /* Adjust 20px as needed for spacing */
+    }
+    .main-content {
+        width: 90%;
     }
 }
 
@@ -99,5 +250,33 @@ header {
     .overlay-text {
         font-size: 2.5em; /* Adjust overlay text size as needed for smaller screens */
         transform: translate(125px, -30px) rotate(-35deg); /* Adjust positioning and tilt */
+    }
+    .main-content {
+        width: 98%;
+    }
+    .repair-time-price {
+        display: none;
+    }
+    .min-max-pr {
+        display: none;
+    }
+    .list-image {
+        height: 50px;
+        width: auto;
+    }
+    .list-row {
+        font-size: 0.85em;
+    }
+    .fa-chevron-right.fa-solid {
+        font-size: 2em;
+        margin-left: 60px;
+    }
+
+    .fa-chevron-left.fa-solid {
+        font-size: 2em;
+        margin-right: 60px;
+    }
+    .list-image-rewards {
+        height: 140px;
     }
 }

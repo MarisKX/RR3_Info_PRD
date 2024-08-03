@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}Events{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">
+        <a href="{% url 'road_collection_groups' %}" class="text-link">Road Collection</a> | All Groups
+    </h4>
+    <div id="eventGroupCarousel" class="carousel slide">
+        <div class="carousel-inner carousel-inner-group">
+            {% for group in road_collection_groups %}
+            <div class="carousel-item group-carousel-picture {% if forloop.first %}active{% endif %}">
+                <div class="row">
+                    <div class="col-12 col-xl-6 group-carousel-image">
+                        <img
+                            src="{{ group.image.url }}"
+                            class="d-block w-100 pointer"
+                            alt="{{ group.name }}"
+                            onclick="window.location='{% url 'road_collection_subgroups' group.id %}';"
+                        >
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <h3>Contains:</h3>
+                        {% for road_collection_subgroup in road_collection_subgroups %}
+                            {% if road_collection_subgroup.event_group == group %}
+                                <div class="content-link mt-1 mb-1" onclick="window.location='{% url 'road_collection_events' road_collection_subgroup.id %}';">
+                                    {{ road_collection_subgroup.display_name }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventGroupCarousel" data-bs-slide="prev">
+            <span aria-hidden="true"><i class="fa-solid fa-chevron-left text-blue"></i></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventGroupCarousel" data-bs-slide="next">
+            <span aria-hidden="true"><i class="fa-solid fa-chevron-right text-blue"></i></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}

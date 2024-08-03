@@ -5,9 +5,6 @@
 {% block extra_title %}Home{% endblock %}
 
 {% block page_header %}
-    <div class="container header-container">
-        {% include 'includes/top-data.html' %}
-    </div>
 {% endblock %}
 
 {% block content %}
@@ -20,9 +17,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Fastest cars by Top Speed</caption>
                 {% for car in road_collection_fastest_car_by_top_speed %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.max_top_speed }}</td>
                     </tr>
                 {% endfor %}
@@ -32,9 +29,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Fastest cars by Acceleration</caption>
                 {% for car in road_collection_fastest_car_by_acceleration %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.max_acceleration }}</td>
                     </tr>
                 {% endfor %}
@@ -44,9 +41,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Highest PR</caption>
                 {% for car in road_collection_highest_max_pr %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.max_pr_score }}</td>
                     </tr>
                 {% endfor %}
@@ -56,9 +53,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Most expensive repair</caption>
                 {% for car in road_collection_most_expensive_repair %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.repair_price }}</td>
                         <td>{{ car.repair_time|format_time }}</td>
                     </tr>
@@ -71,9 +68,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Highest purchase price - R$</caption>
                 {% for car in road_collection_most_expensive_purchase_R %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.default_price }}</td>
                     </tr>
                 {% endfor %}
@@ -83,9 +80,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Highest purchase price - Gold</caption>
                 {% for car in road_collection_most_expensive_purchase_G %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.default_price }}</td>
                     </tr>
                 {% endfor %}
@@ -95,9 +92,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Highest upgrade price - R$</caption>
                 {% for car in road_collection_most_expensive_upgrades_R %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.upgrades_total_R }}</td>
                     </tr>
                 {% endfor %}
@@ -107,9 +104,9 @@
             <table class="table table-striped caption-top mx-3">
                 <caption>Highest upgrade price - Gold</caption>
                 {% for car in road_collection_most_expensive_upgrades_G %}
-                    <tr>
+                    <tr onclick="window.location='{% url 'road_collection_car' car.id %}';">
                         <td>{{ forloop.counter }}.</td>
-                        <td>{{ car }}</td>
+                        <td class="text-nowrap pointer">{{ car }}</td>
                         <td>{{ car.upgrades_total_G }}</td>
                     </tr>
                 {% endfor %}

@@ -7,9 +7,45 @@
 
       <ul class="list-inline list-unstyled text-center text-lg-right my-0">
 
+        <li class="list-inline-item dropdown">
+          <button class="btn btn-secondary bg-white text-blue menu-btn" type="button" id="carsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Cars
+          </button>
+          <ul class="dropdown-menu main-dropdown-menu" aria-labelledby="carsDropdown">
+              <li class="dropdown-submenu">
+                  <a class="dropdown-item dropdown-toggle" href="{% url 'all_road_collection_cars' %}">Road Collection Cars</a>
+                  <ul class="dropdown-menu sub-dropdown-menu">
+                    {% for manufacturer in all_manufacturers %}
+                    <li>
+                        <a id="{{ manufacturer.name }}" class="dropdown-item" href="{% url 'road_collection_manufacturer' manufacturer.id %}">{{ manufacturer.display_name }}</a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+              </li>
+          </ul>
+        </li>
+
+        <li class="list-inline-item dropdown">
+          <button class="btn btn-secondary bg-white text-blue menu-btn" type="button" id="carsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Events
+          </button>
+          <ul class="dropdown-menu main-dropdown-menu" aria-labelledby="carsDropdown">
+              <li class="dropdown-submenu">
+                  <a class="dropdown-item dropdown-toggle" href="{% url 'road_collection_groups' %}">Road Collection Events</a>
+                  <ul class="dropdown-menu sub-dropdown-menu">
+                      {% for group in all_event_groups_road_collection %}
+                      <li>
+                          <a id="{{ group.name }}" class="dropdown-item" href="{% url 'road_collection_subgroups' group.id %}">{{ group.sequence }} | {{ group.display_name }}</a>
+                      </li>
+                      {% endfor %}
+                  </ul>
+              </li>
+          </ul>
+      </li>
+
         {% if request.user.is_superuser %}
         <li class="list-inline-item dropdown">
-            <button class="btn btn-secondary bg-white text-blue" id="properties" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary bg-white text-blue menu-btn" id="properties" data-bs-toggle="dropdown" aria-expanded="false">
               Manager Options
             </button>
             <ul class="dropdown-menu" aria-labelledby="properties">

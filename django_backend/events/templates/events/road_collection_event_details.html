@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}Events{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">
+        <a href="{% url 'road_collection_groups' %}" class="text-link">Road Collection</a> |
+        <a href="{% url 'road_collection_subgroups' road_collection_event.event_group.id %}" class="text-link">{{ road_collection_event.event_group.display_name }}</a> |
+        <a href="{% url 'road_collection_events' road_collection_event.event_sub_group.id %}" class="text-link">{{ road_collection_event.event_sub_group.display_name }}</a> |
+        {{ road_collection_event.display_name }} |
+        {{ road_collection_event.page_sequence }}
+    </h4>
+    <div class="mt-4 mb-5 row">
+        <div class="col-md-6 col-12">
+            <div class="row">
+                <div class="col-6">
+                    Event type
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.event_type.display_name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Track
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.track_and_config }}
+                </div>
+            </div>
+            {% if road_collection_event.laps > 0 %}
+            <div class="row">
+                <div class="col-6">
+                    Laps
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.laps }}
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-6">
+                    Min PR
+                </div>
+                <div class="col-6">
+                    {% if road_collection_event.min_pr_requirements > 0 %}
+                    {{ road_collection_event.min_pr_requirements }}
+                    {% else %}
+                    -
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Time required (approx.)
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.time_required }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Reward
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.reward }} {{ road_collection_event.get_reward_currency_display }}
+                </div>
+            </div>
+            {% if road_collection_event.clean_race_bonus > 0 %}
+            <div class="row">
+                <div class="col-6">
+                    Clean Race Bonus
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.clean_race_bonus }} {{ road_collection_event.get_clean_race_bonus_currency_display }}
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-6">
+                    Fame
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.reward_fame }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Reward per minute
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.reward_in_one_minute_spent }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    Fame per minute
+                </div>
+                <div class="col-6">
+                    {{ road_collection_event.fame_in_one_minute_spent }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="reward-image my-2">
+                <img
+                    src="{{ road_collection_event.reward_image.url }}"
+                    class="d-block w-100 pointer"
+                    alt="{{ road_collection_event.reward }}"
+                >
+            </div>
+            <div class="reward-image my-2">
+                <img
+                    src="{{ road_collection_event.fame_image.url }}"
+                    class="d-block w-100 pointer"
+                    alt="{{ road_collection_event.reward_fame }}"
+                >
+            </div>
+        </div>
+    </div>
+    <h4>Available Cars for this event:</h4>
+    <div class="row">
+        {% for car in featured_cars %}
+            {% if car.max_pr_score > road_collection_event.min_pr_requirements %}
+            <div class="col">
+                <div>
+                    {% if car.image %}
+                        <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">
+                    {% else %}
+                        <img class="list-image pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+                    {% endif %}
+                </div>
+                <div>{{ car.manufacturer.display_name }} {{ car.model }}</div>
+            </div>
+            {% else %}
+            <div class="col not-available-cars">
+                <div>
+                    {% if car.image %}
+                        <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">
+                    {% else %}
+                        <img class="list-image pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+                    {% endif %}
+                </div>
+                <div>{{ car.manufacturer.display_name }} {{ car.model }}</div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}

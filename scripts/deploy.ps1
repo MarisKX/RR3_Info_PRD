@@ -14,4 +14,4 @@ heroku container:release web --app rr3info
 heroku run python manage.py migrate --app rr3info
 
 # Step 5: Collect static files
-heroku run python manage.py collectstatic --noinput --app rr3info
+heroku run python manage.py collectstatic --app rr3info

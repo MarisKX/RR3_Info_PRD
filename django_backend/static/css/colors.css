@@ -4,17 +4,21 @@
 }
 
 .text-red {
-    color: red !important;
+    color: red  !important;
 }
 
 .bg-blue {
     color: rgb(30, 101, 190) !important;
 }
 
-.bg-white {
-    color: white;
-}
-
 .text-blue {
     color: rgb(30, 101, 190) !important;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.text-gold {
+    color: rgb(218, 145, 0) !important;
 }

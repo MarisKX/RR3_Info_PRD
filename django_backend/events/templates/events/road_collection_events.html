@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}Events{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">
+        <a href="{% url 'road_collection_groups' %}" class="text-link">Road Collection</a> |
+        <a href="{% url 'road_collection_subgroups' road_collection_subgroup.event_group.id %}" class="text-link">{{ road_collection_subgroup.event_group.display_name }}</a> |
+        {{ road_collection_subgroup.display_name }}
+    </h4>
+    <div id="eventGroupCarousel" class="carousel slide">
+        <div class="carousel-inner carousel-inner-event">
+            {% for events in road_collection_events %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ event.image.url }}" class="d-block w-100" alt="{{ event.name }}">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventGroupCarousel" data-bs-slide="prev">
+            <span aria-hidden="true"><i class="fa-solid fa-chevron-left text-blue"></i></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventGroupCarousel" data-bs-slide="next">
+            <span aria-hidden="true"><i class="fa-solid fa-chevron-right text-blue"></i></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <h3 class="my-5 mx-5">Full List</h3>
+    {% for event in road_collection_events %}
+        <div class="row pointer" onclick="window.location='{% url 'road_collection_event_details' event.id %}';">
+            <div class="col-3">{{ event.display_name }}</div>
+            <div class="col">{{ event.event_type.display_name }}</div>
+            {% if event.min_pr_requirements > 0 %}
+            <div class="col-1">{{ event.min_pr_requirements }}</div>
+            {% else %}
+            <div class="col-1"></div>
+            {% endif %}
+            <div class="col">{{ event.reward }} {{ reward.get_reward_currency_display }}</div>
+            {% if event.clean_race_bonus > 0 %}
+                <div class="col">{{ event.clean_race_bonus }} {{ reward.get_clean_race_bonus_currency_display }}</div>
+            {% else %}
+                <div class="col"> - </div>
+            {% endif %}
+            <div class="col">{{ event.reward_fame }}</div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}

@@ -61,9 +61,12 @@
 
     <title>Real Racing 3 Info | {% block extra_title %}{% endblock %}</title>
   </head>
-  <header class="container-fluid fixed-top bg-brown">
+  <header class="container-fluid fixed-top">
     {% include 'includes/top-nav.html' %}
   </header>
+  <div class="container header-container">
+    {% include 'includes/top-data.html' %}
+  </div>
 
   {% if messages %}
   <div class="message-container"></div>

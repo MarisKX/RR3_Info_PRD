@@ -1,6 +1,6 @@
 FROM python:3.11-alpine3.18
 LABEL maintainer="mariskx"
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONUNBUFFERED=1
 
 COPY ./requirements.txt /requirements.txt
 

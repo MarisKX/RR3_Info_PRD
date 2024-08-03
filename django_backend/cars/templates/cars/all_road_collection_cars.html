@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}Road Collection Cars{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">Road Collection | Overview</h4>
+    <div class="row list-row">
+        <div class="col-2">
+            Image
+        </div>
+        <div class="col">
+            Manufacturer
+        </div>
+        <div class="col">
+            Model
+        </div>
+        <div class="col">
+            Config
+        </div>
+        <div class="col min-max-pr">
+            Init PR/Max PR
+        </div>
+        <div class="col">
+            Default Price
+        </div>
+        <div class="col repair-time-price">
+            Repair Price | Time
+        </div>
+    </div>
+    {% for car in all_road_collection_cars %}
+    <div class="row list-row pointer" onclick="window.location='{% url 'road_collection_car' car.id %}';">
+        <div class="col-2">
+            {% if car.image %}
+                <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">
+            {% else %}
+                <img class="list-image pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+            {% endif %}
+        </div>
+        <div class="col">
+            {{ car.manufacturer.display_name }}
+        </div>
+        <div class="col">
+            {{ car.model }}
+        </div>
+        <div class="col">
+            {{ car.get_baseclass_display }} | {{ car.get_eng_drive_display  }}
+        </div>
+        <div class="col min-max-pr">
+            {{ car.init_pr_score }} | {{ car.max_pr_score  }}
+        </div>
+        <div class="col">
+            {{ car.default_price }} {{ car.get_currency_display  }}
+        </div>
+        <div class="col repair-time-price">
+            {{ car.repair_price }} {{ car.get_repair_currency_display  }} | {{ car.repair_time|format_time }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}Events{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">
+        <a href="{% url 'road_collection_groups' %}" class="text-link">Road Collection</a> |
+        {{ road_collection_group.display_name }}
+    </h4>
+    <div id="eventSubGroupCarousel" class="carousel slide">
+        <div class="carousel-inner carousel-inner-subgroup">
+            {% for subgroup in road_collection_subgroups %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="row">
+                    <div class="col-12 col-xl-6 subgroup-carousel-picture">
+                        <img
+                            src="{{ subgroup.image.url }}"
+                            class="d-block w-100 pointer"
+                            alt="{{ subgroup.name }}"
+                            onclick="window.location='{% url 'road_collection_events' subgroup.id %}';"
+                        >
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <h3>Featured cars:</h3>
+                        {% for car in subgroup.featured_cars.all %}
+                        <div class="content-link" onclick="window.location='{% url 'road_collection_car' car.id %}';">
+                            <div class="row">
+                                <div class="col-6">
+                                    {% if car.image %}
+                                        <img class="list-image-carousel pointer" src="{{ car.image.url }}" alt="{{ car.model }}">
+                                    {% else %}
+                                        <img class="list-image-carousel pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+                                    {% endif %}
+                                </div>
+                                <div class="col-6">
+                                    {{ car.manufacturer.display_name }} {{ car.model }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h3 class="mt-4">Rewards:</h3>
+                <div class="row">
+                    {% for reward in subgroup_rewards %}
+                        {% if reward.event_subgroup == subgroup %}
+                            <div class="col-12 col-sm-6 col-xl-3 text-center">
+                                <div>
+                                    {% if reward.image %}
+                                        <img class="list-image-rewards pointer" src="{{ reward.image.url }}" alt="{{ reward.reward_name }}">
+                                    {% else %}
+                                        <img class="list-image-rewards pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventSubGroupCarousel" data-bs-slide="prev">
+            <span aria-hidden="true"><i class="fa-solid fa-chevron-left text-blue"></i></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventSubGroupCarousel" data-bs-slide="next">
+            <span aria-hidden="true"><i class="fa-solid fa-chevron-right text-blue"></i></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <h3 class="my-5 mx-5">Details</h3>
+    <div class="row">
+        <h5 class="m-1">All Featured Cars in {{ road_collection_group.display_name }}</h5>
+        {% for car in featured_cars %}
+            <div class="col">
+                <div>
+                    {% if car.image %}
+                        <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">
+                    {% else %}
+                        <img class="list-image pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+                    {% endif %}
+                </div>
+                <div>{{ car.manufacturer.display_name }} {{ car.model }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}

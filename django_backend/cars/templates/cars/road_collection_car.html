@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block extra_title %}{{ road_collection_car }}{% endblock %}
+
+{% block page_header %}
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <h4 class="my-5 mx-5">Road Collection | {{ road_collection_car }}</h4>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <div class="row">
+                <div class="col">
+                    Class
+                </div>
+                <div class="col">
+                    {{ road_collection_car.get_baseclass_display }} | {{ road_collection_car.get_eng_drive_display }}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div id="carColorCarousel" class="carousel slide">
+                <div class="carousel-inner car-carousel-inner">
+                    {% for image in official_colors %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.name }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carColorCarousel" data-bs-slide="prev">
+                    <span aria-hidden="true"><i class="fa-solid fa-chevron-left text-blue"></i></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carColorCarousel" data-bs-slide="next">
+                    <span aria-hidden="true"><i class="fa-solid fa-chevron-right text-blue"></i></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <h5 class="my-5 mx-5">Events</h5>
+    <div class="row">
+        {% for eventsubgroup in event_subgroups %}
+        <div class="col-2">
+            <h6>{{ eventsubgroup.display_name }}</h6>
+            <div>
+                <img
+                    src="{{ eventsubgroup.image.url }}"
+                    class="d-block event-picture"
+                    alt="{{ eventsubgroup.name }}"
+                    onclick="window.location='{% url 'road_collection_events' eventsubgroup.id %}';"
+                >
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <h5 class="my-5 mx-5">Specifications</h5>
+    <table class="mb-5">
+        <tr>
+            <th></th>
+            <th>Max Speed</th>
+            <th>Acceleration</th>
+            <th>Braking distance</th>
+            <th>Cornering</th>
+            <th>PR</th>
+        </tr>
+        <tr>
+            <td>Min</td>
+            <td>{{ road_collection_car.init_top_speed }}</td>
+            <td>{{ road_collection_car.init_acceleration }}</td>
+            <td>{{ road_collection_car.init_braking_distance }}</td>
+            <td>{{ road_collection_car.init_cornering }}</td>
+            <td>{{ road_collection_car.init_pr_score }}</td>
+        </tr>
+        <tr>
+            <td>Max</td>
+            <td>{{ road_collection_car.max_top_speed }}</td>
+            <td>{{ road_collection_car.max_acceleration }}</td>
+            <td>{{ road_collection_car.max_braking_distance }}</td>
+            <td>{{ road_collection_car.max_cornering }}</td>
+            <td>{{ road_collection_car.max_pr_score }}</td>
+        </tr>
+    </table>
+    <h5 class="my-5 mx-5">Upgrades</h5>
+    <table class="mb-5">
+        <tr>
+            <th><i class="fa-duotone fa-sort"></i></th>
+            <th>Type | Title</th>
+            <th>Increase Top Speed</th>
+            <th>Improve Acceleration</th>
+            <th>Reduce Braking distance</th>
+            <th>Improve Cornering</th>
+            <th>Increase PR</th>
+            <th>Price</th>
+            <th>Price Gold</th>
+            <th>Duration</th>
+            <th>Image</th>
+        </tr>
+        {% for upgrade in upgrades %}
+        <tr>
+            <td>{{ upgrade.upgrade_sequence }}</td>
+            <td>{{ upgrade.upgrade }}</td>
+            <td>{{ upgrade.improvement_top_speed }}</td>
+            <td>{{ upgrade.improvement_acceleration }}</td>
+            <td>{{ upgrade.improvement_braking_distance }}</td>
+            <td>{{ upgrade.improvement_cornering }}</td>
+            <td>{{ upgrade.improvement_pr }}</td>
+            {% if upgrade.upgrade_option1_price > 0 %}
+            <td>{{ upgrade.upgrade_option1_price }} {{ upgrade.get_upgrade_option1_currency_display }}</td>
+            <td>{{ upgrade.upgrade_option2_price }}</td>
+            {% else %}
+            <td> - </td>
+            <td class="text-gold">{{ upgrade.upgrade_option2_price }}</td>
+            {% endif %}
+            <td>{{ upgrade.upgrade_time|format_time }}</td>
+            <td class="imagefield-td">
+                <img src="{{ upgrade.image.url }}" class="d-block event-picture" alt="{{ upgrade.upgrade }}">
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div>Footer</div>
+</div>
+
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <!-- Custom Scripts -->
+
+
+{% endblock %}
