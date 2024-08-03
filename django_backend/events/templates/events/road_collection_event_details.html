@@ -127,6 +127,18 @@
     </div>
     <h4>Available Cars for this event:</h4>
     <div class="row">
+        {% if road_collection_event.unique_car %}
+            <div class="col">
+                <div>
+                    {% if road_collection_event.unique_car.image %}
+                        <img class="list-image pointer" src="{{ road_collection_event.unique_car.image.url }}" alt="{{ road_collection_event.unique_car.model }}">
+                    {% else %}
+                        <img class="list-image pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
+                    {% endif %}
+                </div>
+                <div>{{ car.manufacturer.display_name }} {{ car.model }}</div>
+            </div>
+        {% else %}
         {% for car in featured_cars %}
             {% if car.max_pr_score > road_collection_event.min_pr_requirements %}
             <div class="col">
@@ -152,6 +164,7 @@
             </div>
             {% endif %}
         {% endfor %}
+        {% endif %}
     </div>
 </div>
 

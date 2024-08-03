@@ -159,6 +159,7 @@ class Event(models.Model):
     description = models.CharField(max_length=500, null=True, blank=True)
     event_group = models.ForeignKey('EventGroup', null=False, blank=False, on_delete=models.CASCADE)
     event_sub_group = models.ForeignKey('EventSubGroup', null=False, blank=False, on_delete=models.CASCADE)
+    unique_car = models.ForeignKey(Car, related_name='unique_car', blank=True, null=True, on_delete=models.CASCADE)
     page = models.IntegerField(null=False, blank=False)
     page_sequence = models.IntegerField(null=False, blank=False, validators=[MinValueValidator(1), MaxValueValidator(5)])
     event_type = models.ForeignKey('EventType', null=False, blank=False, on_delete=models.CASCADE)
