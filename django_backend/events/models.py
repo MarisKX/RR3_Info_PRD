@@ -166,8 +166,8 @@ class Event(models.Model):
     track_and_config = models.ForeignKey('TrackConfiguaration', null=True, blank=True, on_delete=models.CASCADE)
     notes = models.CharField(max_length=100, null=True, blank=True)
     laps = models.IntegerField(null=False, blank=False, default=0)
-    min_pr_requirements = models.DecimalField(max_digits=4, decimal_places=1, blank=False, null=False)
-    time_required = models.DurationField()
+    min_pr_requirements = models.DecimalField(max_digits=4, decimal_places=1, blank=False, null=False, default=0)
+    time_required = models.DurationField(default=0)
     reward = models.IntegerField(null=False, blank=False)
     currency_choices = [
         ('0', 'MS'),
@@ -177,7 +177,7 @@ class Event(models.Model):
     ]
     reward_currency = models.CharField(
         choices=currency_choices, default='1', max_length=2)
-    clean_race_bonus = models.IntegerField(null=False, blank=False)
+    clean_race_bonus = models.IntegerField(null=False, blank=False, default=0)
     clean_race_bonus_currency = models.CharField(
         choices=currency_choices, default='1', max_length=2)
     reward_image = models.ImageField(upload_to=gufp, blank=True, null=True)

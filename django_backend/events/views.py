@@ -25,7 +25,7 @@ def road_collection_subgroups(request, id):
     road_collection_events = Event.objects.filter(section='1').order_by('event_group', 'event_sub_group', 'page', 'page_sequence')
     road_collection_group = get_object_or_404(EventGroup, id=id)
 
-    subgroup_rewards = EventSubGroupRewards.objects.filter(event_subgroup__in=road_collection_subgroups)
+    subgroup_rewards = EventSubGroupRewards.objects.filter(event_subgroup__in=road_collection_subgroups).order_by('reward_name')
 
     # Collect all featured cars from subgroups
     featured_cars = Car.objects.filter(featured_in_events__in=road_collection_subgroups).distinct()

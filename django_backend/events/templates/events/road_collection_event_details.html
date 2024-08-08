@@ -14,7 +14,7 @@
         <a href="{% url 'road_collection_groups' %}" class="text-link">Road Collection</a> |
         <a href="{% url 'road_collection_subgroups' road_collection_event.event_group.id %}" class="text-link">{{ road_collection_event.event_group.display_name }}</a> |
         <a href="{% url 'road_collection_events' road_collection_event.event_sub_group.id %}" class="text-link">{{ road_collection_event.event_sub_group.display_name }}</a> |
-        {{ road_collection_event.display_name }} |
+        {{ road_collection_event.page }} - {{ road_collection_event.display_name }} |
         {{ road_collection_event.page_sequence }}
     </h4>
     <div class="mt-4 mb-5 row">
@@ -33,6 +33,9 @@
                 </div>
                 <div class="col-6">
                     {{ road_collection_event.track_and_config }}
+                    {% if road_collection_event.notes %}
+                    <span> ( {{ road_collection_event.notes }} )</span>
+                    {% endif %}
                 </div>
             </div>
             {% if road_collection_event.laps > 0 %}
@@ -128,7 +131,7 @@
     <h4>Available Cars for this event:</h4>
     <div class="row">
         {% if road_collection_event.unique_car %}
-            <div class="col">
+            <div class="col" onclick="window.location='{% url 'road_collection_car' road_collection_event.unique_car.id %}';">
                 <div>
                     {% if road_collection_event.unique_car.image %}
                         <img class="list-image pointer" src="{{ road_collection_event.unique_car.image.url }}" alt="{{ road_collection_event.unique_car.model }}">
@@ -141,7 +144,7 @@
         {% else %}
         {% for car in featured_cars %}
             {% if car.max_pr_score > road_collection_event.min_pr_requirements %}
-            <div class="col">
+            <div class="col" onclick="window.location='{% url 'road_collection_car' car.id %}';">
                 <div>
                     {% if car.image %}
                         <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">
@@ -152,7 +155,7 @@
                 <div>{{ car.manufacturer.display_name }} {{ car.model }}</div>
             </div>
             {% else %}
-            <div class="col not-available-cars">
+            <div class="col not-available-cars" onclick="window.location='{% url 'road_collection_car' car.id %}';">
                 <div>
                     {% if car.image %}
                         <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">

@@ -68,7 +68,11 @@ class EventSubGroupAdmin(admin.ModelAdmin):
 
 
 class EventAdmin(admin.ModelAdmin):
-    readonly_fields = ('name', )
+    readonly_fields = (
+        'name',
+        'reward_in_one_minute_spent',
+        'fame_in_one_minute_spent',
+    )
     ordering = ['page', 'page_sequence', ]
     list_display = (
         'event_sub_group',

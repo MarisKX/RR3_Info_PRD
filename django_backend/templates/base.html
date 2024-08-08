@@ -78,6 +78,12 @@
   {% block content %}
   {% endblock %}
 
+  {% block footer %}
+  <div class="footer mt-3">
+
+  </div>
+  {% endblock %}
+
   {% block postloadjs %}
     {{ block.super }}
     <script src="{% static 'js/dropdownSubmenu.js' %}"></script>

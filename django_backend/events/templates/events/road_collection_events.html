@@ -34,24 +34,30 @@
     </div>
     <h3 class="my-5 mx-5">Full List</h3>
     {% for event in road_collection_events %}
+        {% ifchanged event.page event.display_name %}
+            <div class="row">
+                <div class="col-12 col-lg-11 offset-lg-1">
+                    <strong>{{ event.page }} - {{ event.display_name }}</strong>
+                </div>
+            </div>
+        {% endifchanged %}
         <div class="row pointer" onclick="window.location='{% url 'road_collection_event_details' event.id %}';">
-            <div class="col-3">{{ event.display_name }}</div>
-            <div class="col">{{ event.event_type.display_name }}</div>
+            <div class="col-4 col-lg-3 offset-lg-1 ps-4">{{ event.page_sequence }} - {{ event.event_type.display_name }}</div>
             {% if event.min_pr_requirements > 0 %}
-            <div class="col-1">{{ event.min_pr_requirements }}</div>
+                <div class="col-1 col-lg-1">{{ event.min_pr_requirements }}</div>
             {% else %}
-            <div class="col-1"></div>
+                <div class="col-1 col-lg-1"></div>
             {% endif %}
-            <div class="col">{{ event.reward }} {{ reward.get_reward_currency_display }}</div>
+            <div class="col-3 col-lg-1">{{ event.reward }} {{ event.get_reward_currency_display }}</div>
             {% if event.clean_race_bonus > 0 %}
-                <div class="col">{{ event.clean_race_bonus }} {{ reward.get_clean_race_bonus_currency_display }}</div>
+                <div class="col-2 col-lg-1">{{ event.clean_race_bonus }} {{ event.get_clean_race_bonus_currency_display }}</div>
             {% else %}
-                <div class="col"> - </div>
+                <div class="col-2 col-lg-1"> - </div>
             {% endif %}
-            <div class="col">{{ event.reward_fame }}</div>
+            <div class="col-1">{{ event.reward_fame }}</div>
         </div>
     {% endfor %}
-</div>
+    </div>
 
 {% endblock %}
 

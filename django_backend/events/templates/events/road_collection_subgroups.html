@@ -54,7 +54,7 @@
                             <div class="col-12 col-sm-6 col-xl-3 text-center">
                                 <div>
                                     {% if reward.image %}
-                                        <img class="list-image-rewards pointer" src="{{ reward.image.url }}" alt="{{ reward.reward_name }}">
+                                        <img class="list-image-rewards pointer {{ reward.reward_name }}" src="{{ reward.image.url }}" alt="{{ reward.reward_name }}">
                                     {% else %}
                                         <img class="list-image-rewards pointer" src="{{ MEDIA_URL }}No-image.png" alt="No Image Available">
                                     {% endif %}
@@ -79,7 +79,7 @@
     <div class="row">
         <h5 class="m-1">All Featured Cars in {{ road_collection_group.display_name }}</h5>
         {% for car in featured_cars %}
-            <div class="col">
+            <div class="col" onclick="window.location='{% url 'road_collection_car' car.id %}';">
                 <div>
                     {% if car.image %}
                         <img class="list-image pointer" src="{{ car.image.url }}" alt="{{ car.model }}">

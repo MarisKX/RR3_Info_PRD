@@ -67,6 +67,10 @@ def process_event_subgroup_rewards_image_before_save(sender, instance, **kwargs)
         print("Processing EventSubGroupRewards image...")  # Debug
         instance.image = process_image(instance.image, crop_top=420, crop_bottom=445, crop_left=490, crop_right=490)
         print("EventSubGroupRewards Image processing complete.")  # Debug
+    elif instance.image:
+        print("Processing EventSubGroupRewards image...")  # Debug
+        instance.image = process_image(instance.image, crop_top=350, crop_bottom=400, crop_left=480, crop_right=480)
+        print("EventSubGroupRewards Image processing complete.")  # Debug
 
 @receiver(pre_save, sender=Event)
 def process_event_rewards_image_before_save(sender, instance, **kwargs):

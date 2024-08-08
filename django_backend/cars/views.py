@@ -31,7 +31,7 @@ def road_collection_cars_by_manufacturer(request, id):
 def road_collection_car(request, id):
     """Render the car details"""
     road_collection_car = get_object_or_404(Car, id=id)
-    official_colors = OfficialColors.objects.filter(car=road_collection_car)
+    official_colors = OfficialColors.objects.filter(car=road_collection_car).order_by('id')
     event_subgroups = EventSubGroup.objects.filter(featured_cars=road_collection_car).order_by('page', '-main_event')
     upgrades = CarUpgrade.objects.filter(car=road_collection_car).order_by('upgrade__upgrade_type', 'upgrade_sequence', )
     context = {
